@@ -62,6 +62,11 @@ app.get('/', function(req, res){
 });
 
 
+app.get('/css/:stylesheet_id', function(req, res){
+    let stylesheet_id = req.params.stylesheet_id;
+    res.sendFile(stylesheet_id, {root: dir[1]} );
+});
+
 var io = require('socket.io').listen(app.listen(config.PORT, function(){
     console.log('connecting \n . \n .. \n ... \n .... \n ..... \n ------------------------------------------');
     console.log('    VIEWXR v 0.0.1 ');

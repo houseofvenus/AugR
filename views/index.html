@@ -3,6 +3,7 @@
 <head>
     <title>House of Venus | City as a Service | viewXR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./css/viewXR.css" type="text/css" />
     <script>
         document.addEventListener("DOMContentLoaded", function(){
           // Put variables in global scope to make them available to the browser console.
@@ -47,8 +48,10 @@
 </head>
 <body>
     <!-- Stream video via webcam -->
-    <video id="video" autoplay width="640" height="480" style="border: black 2px solid;"></video>
-    <div id="errorMsg"></div>
+    <div id="main-app-container">
+        <video id="webcam-container" autoplay width="640" height="480" style="border: black 2px solid;"></video>
+        <div id="errorMsg"></div>
+    </div>
 </body>
 </html>
 <!-- In the pARk, there is a store called "Snack Shack".
