@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Archivo", sans-serif;
 }
 
 body, html, #main-app-container{
@@ -14,13 +15,23 @@ body, html, #main-app-container{
     background-color: rgba(0, 0, 0, 0.95);
 }
 
-#webcam-container{
+#webcam-container, #second-webcam-container{
+  box-shadow: 5px 5px 5px white;
     width: 640px;
     height: 480px;
     position: absolute;
-    top: 50%;
     left: 50%;
+    transition: top 0.5s, left 0.5s, right 0.5s, bottom 0.5s;
+}
+
+#webcam-container{
+    top: 50%;
     margin: -240px 0 0 -320px;
+}
+
+#second-webcam-container{
+    bottom: 1%;
+    margin-left: -320px;
 }
 
 .menu-container{
@@ -36,16 +47,65 @@ body, html, #main-app-container{
 
 .menu-button{
     border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    line-height: 75px;
+    color: white;
+    margin: 15% auto;
+    cursor: pointer;
+    transition: background-color 0.25s;
 }
 
-#-menu-button{
-
+#connect-to-rfid-menu-button:hover, #link-to-new-rfid-menu-button:hover, #split-screen-menu-button:hover{
+    background-color: white;
+    color: black;
 }
 
 #connect-to-rfid-menu-button{
+    background-color: red;
+}
 
+#link-to-new-rfid-menu-button{
+    background-color: aquamarine;
 }
 
 #split-screen-menu-button{
+    background-color: blue;
+}
+
+#link-status-display-container{
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    background-color: white;
+    color: black;
+    z-index: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+}
+
+#link-status-display-title-container{
+    font-size: 24px;
+}
+
+#link-status-display-bar{
+    width: 0;
+    height: 100%;
+    background-color: aquamarine;
+    transition: width 3s;
+}
+
+#link-status-display-bar-container{
+    width: 80%;
+    height: 10%;
+    border-radius: 5px;
+    background-color: gray;
+    cursor: pointer;
+}
+
+#link-status-display-content-container{
 
 }

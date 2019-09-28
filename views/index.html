@@ -43,6 +43,90 @@
                       console.error(error);
                   }
               }
+
+              function splitScreen(){ /*
+                                      *   splits the screen to allow for multiple "desktops",
+                                      *   i.e. connect to various cARds locally by tapping or
+                                      *   remotely via pARk broadcast
+                                      */
+                  let videoContainer = document.getElementById("webcam-container");
+                  videoContainer.style.top = 0;
+                  videoContainer.style.marginTop = 0;
+                  videoContainer.style.marginLeft = "-240px";
+                  videoContainer.setAttribute("width", 480);
+                  videoContainer.style.width = "480px";
+                  videoContainer.setAttribute("height", 320);
+                  videoContainer.style.height = "320px";
+
+                  let secondViewXRContainer = document.createElement("video");
+                  secondViewXRContainer.setAttribute("id", "second-webcam-container");
+                  secondViewXRContainer.style.marginLeft = "-240px";
+                  secondViewXRContainer.setAttribute("width", 480);
+                  secondViewXRContainer.style.width = "480px";
+                  secondViewXRContainer.setAttribute("height", 320);
+                  secondViewXRContainer.style.height = "320px";
+
+                  document.getElementById("main-app-container").appendChild(secondViewXRContainer);
+              }
+
+              function showLinkStatusDisplay(){
+                  let linkStatusDisplay = document.createElement("div");
+                  let linkStatusDisplayTitle = document.createElement("div");
+                  let linkStatusDisplayBar = document.createElement("div");
+                  let linkStatusDisplayBarContainer = document.createElement("div");
+                  let linkStatusDisplayContent = document.createElement("div");
+                  linkStatusDisplay.setAttribute("id","link-status-display-container");
+                  linkStatusDisplayTitle.setAttribute("id","link-status-display-title-container");
+                  linkStatusDisplayBarContainer.setAttribute("id","link-status-display-bar-container");
+                  linkStatusDisplayContent.setAttribute("id","link-status-display-content-container");
+                  linkStatusDisplayBar.setAttribute("id","link-status-display-bar");
+
+                  linkStatusDisplayTitle.textContent = "Link Status Display"
+                  linkStatusDisplayContent.innerHTML = "<p> text will go here </p>";
+                  linkStatusDisplayBarContainer.appendChild(linkStatusDisplayBar);
+
+                  linkStatusDisplay.appendChild(linkStatusDisplayTitle);
+                  linkStatusDisplay.appendChild(linkStatusDisplayBarContainer);
+                  linkStatusDisplay.appendChild(linkStatusDisplayContent);
+                  document.getElementById("main-app-container").appendChild(linkStatusDisplay);
+
+                  setTimeout(function(){
+                      linkStatusDisplayBar.width = "100%";
+                  }, 50);
+
+                  setTimeout(function(){
+                      linkStatusDisplay.style.display = "none";
+                  }, 3100);
+              }
+
+              function activateDeviceNFCReader(){
+                  console.log("TODO: checking if device nfc reader is already active...");
+                  console.log("TODO: activating device nfc reader...");
+              }
+
+              function connectToRFID(){
+                  activateDeviceNFCReader();
+                  opencARd();
+              }
+
+              function opencARd(){
+                  console.log("TODO: open creative Augmented Reality desktop and load lyoko ledgerspace token...");
+              }
+
+              document.getElementById("connect-to-rfid-menu-button").addEventListener("click", function(){
+                  connectToRFID();
+              });
+
+              document.getElementById("link-to-new-rfid-menu-button").addEventListener("click", function(){
+                  showLinkStatusDisplay();
+                  activateDeviceNFCReader();
+                  splitScreen();
+                  opencARd();
+              });
+
+              document.getElementById("split-screen-menu-button").addEventListener("click", function(){ //
+                  splitScreen();
+              });
         });
     </script>
 </head>
@@ -51,6 +135,11 @@
     <div id="main-app-container">
         <video id="webcam-container" autoplay width="640" height="480" style="border: black 2px solid;"></video>
         <div id="errorMsg"></div>
+        <div class="menu-container">
+            <div id="connect-to-rfid-menu-button" class="menu-button">conn</div>
+            <div id="link-to-new-rfid-menu-button" class="menu-button">link</div>
+            <div id="split-screen-menu-button" class="menu-button">splt</div>
+        </div>
     </div>
 </body>
 </html>
