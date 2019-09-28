@@ -44,6 +44,10 @@
                   }
               }
 
+              var  viewerContainer = [
+
+              ];
+              
               function splitScreen(){ /*
                                       *   splits the screen to allow for multiple "desktops",
                                       *   i.e. connect to various cARds locally by tapping or
@@ -91,7 +95,7 @@
                   document.getElementById("main-app-container").appendChild(linkStatusDisplay);
 
                   setTimeout(function(){
-                      linkStatusDisplayBar.width = "100%";
+                      linkStatusDisplayBar.style.width = "100%";
                   }, 50);
 
                   setTimeout(function(){
