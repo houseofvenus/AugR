@@ -81,6 +81,11 @@
                   document.getElementById("webcam-0-container"),
               ];
 
+              var sessionManager = {
+                  statusShown: false,
+                  screenCount: 1,
+              };
+
               function splitScreen(){ /*
                                       *   splits the screen to allow for multiple "desktops",
                                       *   i.e. connect to various cARds locally by tapping or
@@ -145,34 +150,71 @@
 
               }
 
-              function showLinkStatusDisplay(){
-                  let linkStatusDisplay = document.createElement("div");
-                  let linkStatusDisplayTitle = document.createElement("div");
-                  let linkStatusDisplayBar = document.createElement("div");
-                  let linkStatusDisplayBarContainer = document.createElement("div");
-                  let linkStatusDisplayContent = document.createElement("div");
-                  linkStatusDisplay.setAttribute("id","link-status-display-container");
-                  linkStatusDisplayTitle.setAttribute("id","link-status-display-title-container");
-                  linkStatusDisplayBarContainer.setAttribute("id","link-status-display-bar-container");
-                  linkStatusDisplayContent.setAttribute("id","link-status-display-content-container");
-                  linkStatusDisplayBar.setAttribute("id","link-status-display-bar");
+              function showLinkStatusDisplay(code){
+                  let type = code;
+                  let linkStatusDisplay, linkStatusDisplayBar, linkStatusDisplayBarContainer, linkStatusDisplayTitle, linkStatusDisplayContent;
+                  if(sessionManager.statusShown){
+                      console.log("dom elements for link status display already created");
+                      linkStatusDisplay = document.getElementById("link-status-display-container");
+                      linkStatusDisplayTitle = document.getElementById("link-status-display-title-container");
+                      linkStatusDisplayBar = document.getElementById("link-status-display-bar");
+                      linkStatusDisplayBarContainer = document.getElementById("link-status-display-bar-container");
+                      linkStatusDisplayContent = document.getElementById("link-status-display-content-container");
+                  }
+                  else{
+                      linkStatusDisplay = document.createElement("div");
+                      linkStatusDisplayTitle = document.createElement("div");
+                      linkStatusDisplayBar = document.createElement("div");
+                      linkStatusDisplayBarContainer = document.createElement("div");
+                      linkStatusDisplayContent = document.createElement("div");
+                      linkStatusDisplay.setAttribute("id","link-status-display-container");
+                      linkStatusDisplayTitle.setAttribute("id","link-status-display-title-container");
+                      linkStatusDisplayBarContainer.setAttribute("id","link-status-display-bar-container");
+                      linkStatusDisplayContent.setAttribute("id","link-status-display-content-container");
+                      linkStatusDisplayBar.setAttribute("id","link-status-display-bar");
+                  }
+                  linkStatusDisplayBar.style.width = 0;
+                  /*    while (myNode.firstChild) {
+                      myNode.removeChild(myNode.firstChild);
+                  }
+                  */
+                  if(type==0){
+                          console.log("hahaha");
+                          linkStatusDisplayTitle.innerHTML = "Connect"
+                          linkStatusDisplayContent.innerHTML = "<p style='width: 80%; margin: 0 auto; display: block; padding-top: 5%; text-align: center;'> Opening this <span style='font-weight:900;'>cARd</span> and loading its Lyoko Ledgerspace Token...</p>";
+                  }
+                  else if(type==1){
+                        console.log("oooooo");
+                        linkStatusDisplayTitle.innerHTML= "Link"
+                        linkStatusDisplayContent.innerHTML = "<p style='width: 70%; margin: 0 auto; text-align: center; padding-top: 5%;'> Linking this session to another <span style='font-weight:900;'>cARd</span>...</p>";
+                  }
+                  else{
+                      linkStatusDisplayTitle.textContent = "Link Status Display"
+                      linkStatusDisplayContent.innerHTML = "<p> text will go here </p>";
+                      console.log("no code provided");
+                  }
 
-                  linkStatusDisplayTitle.textContent = "Link Status Display"
-                  linkStatusDisplayContent.innerHTML = "<p> text will go here </p>";
-                  linkStatusDisplayBarContainer.appendChild(linkStatusDisplayBar);
+                  if(sessionManager.statusShown){
+                      linkStatusDisplay.style.display = "block"
+                  }
+                  else{
+                      linkStatusDisplayBarContainer.appendChild(linkStatusDisplayBar);
+                      linkStatusDisplay.appendChild(linkStatusDisplayTitle);
+                      linkStatusDisplay.appendChild(linkStatusDisplayBarContainer);
+                      linkStatusDisplay.appendChild(linkStatusDisplayContent);
 
-                  linkStatusDisplay.appendChild(linkStatusDisplayTitle);
-                  linkStatusDisplay.appendChild(linkStatusDisplayBarContainer);
-                  linkStatusDisplay.appendChild(linkStatusDisplayContent);
-                  document.getElementById("main-app-container").appendChild(linkStatusDisplay);
-
+                      document.getElementById("main-app-container").appendChild(linkStatusDisplay);
+                  }
                   setTimeout(function(){
                       linkStatusDisplayBar.style.width = "100%";
                   }, 50);
 
                   setTimeout(function(){
                       linkStatusDisplay.style.display = "none";
+                      sessionManager.statusShown = true;
                   }, 3100);
+                  //}
+
               }
 
               function activateDeviceNFCReader(){
@@ -182,11 +224,11 @@
 
               function connectToRFID(){
                   activateDeviceNFCReader();
-                  opencARd();
+                  opencARd(0);
               }
 
-              function opencARd(){
-                  console.log("TODO: open creative Augmented Reality desktop and load lyoko ledgerspace token...");
+              function opencARd(code){
+                  showLinkStatusDisplay(code);
               }
 
               document.getElementById("connect-to-rfid-menu-button").addEventListener("click", function(){
@@ -194,10 +236,9 @@
               });
 
               document.getElementById("link-to-new-rfid-menu-button").addEventListener("click", function(){
-                  showLinkStatusDisplay();
                   activateDeviceNFCReader();
                   splitScreen();
-                  opencARd();
+                  opencARd(1);
               });
 
               document.getElementById("split-screen-menu-button").addEventListener("click", function(){ //

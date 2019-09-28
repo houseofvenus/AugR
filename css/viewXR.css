@@ -29,6 +29,7 @@ body, html{
     position: absolute;
     left: 50%;
     transition: top 0.5s, left 0.5s, right 0.5s, bottom 0.5s;
+    z-index: 0;
 }
 
 #webcam-0-container{
@@ -50,6 +51,7 @@ body, html{
     min-height: 300px;
     border-radius: 10px 0 0 10px;
     background-color: rgba(255, 255, 255, 0.8);
+    z-index: 50;
 }
 
 .menu-button{
@@ -87,7 +89,7 @@ body, html{
     border-radius: 15px;
     background-color: white;
     color: black;
-    z-index: 100px;
+    z-index: 100;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -96,6 +98,7 @@ body, html{
 
 #link-status-display-title-container{
     font-size: 24px;
+    text-align: center;
 }
 
 #link-status-display-bar{
@@ -106,6 +109,7 @@ body, html{
 }
 
 #link-status-display-bar-container{
+    margin: 1% auto;
     width: 80%;
     height: 10%;
     border-radius: 5px;
