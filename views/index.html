@@ -44,33 +44,105 @@
                   }
               }
 
-              var  viewerContainer = [
-
+              var  viewerContainerSeries = [
+                  {
+                      top: 0,
+                      marginTop: 0,
+                      marginLeft: "-320",
+                      width: 640,
+                      height: 480,
+                  },
+                  {
+                      top: 0,
+                      marginTop: 0,
+                      marginLeft: "-240",
+                      width: 480,
+                      height: 360,
+                  },
+                  {
+                      top: 0,
+                      marginTop: 0,
+                      marginLeft: "-180",
+                      width: 360,
+                      height: 270,
+                      left: 0
+                  },
+                  {
+                      top: 0,
+                      marginTop: 0,
+                      marginLeft: "-120",
+                      width: 240,
+                      height: 180,
+                      left: 0
+                  }
               ];
-              
+
+              var viewerTracker = [
+                  document.getElementById("webcam-0-container"),
+              ];
+
               function splitScreen(){ /*
                                       *   splits the screen to allow for multiple "desktops",
                                       *   i.e. connect to various cARds locally by tapping or
                                       *   remotely via pARk broadcast
                                       */
-                  let videoContainer = document.getElementById("webcam-container");
-                  videoContainer.style.top = 0;
-                  videoContainer.style.marginTop = 0;
-                  videoContainer.style.marginLeft = "-240px";
-                  videoContainer.setAttribute("width", 480);
-                  videoContainer.style.width = "480px";
-                  videoContainer.setAttribute("height", 320);
-                  videoContainer.style.height = "320px";
 
-                  let secondViewXRContainer = document.createElement("video");
-                  secondViewXRContainer.setAttribute("id", "second-webcam-container");
-                  secondViewXRContainer.style.marginLeft = "-240px";
-                  secondViewXRContainer.setAttribute("width", 480);
-                  secondViewXRContainer.style.width = "480px";
-                  secondViewXRContainer.setAttribute("height", 320);
-                  secondViewXRContainer.style.height = "320px";
+                  let nextView = document.createElement("video");
+                  nextView.setAttribute("id", `webcam-${viewerTracker.length}-container`);
+                  nextView.classList.add(`viewer-container`);
 
-                  document.getElementById("main-app-container").appendChild(secondViewXRContainer);
+                  viewerTracker.push(nextView);
+                  console.log(viewerTracker);
+                  console.log("-------------------------------------------------");
+                  let topMult = 0;
+                  for(var i=0; i<viewerTracker.length; i++){
+                      (function(){
+                          let videoContainer = viewerTracker[i];
+                          console.log(viewerTracker[i]);
+                          if(viewerTracker.length>3){
+
+                              if(i>0){
+                                  let mult = i % 3;
+                                  videoContainer.style.left = (mult*viewerContainerSeries[2].width)+"px";
+                                  if(mult==0){
+                                      topMult++;
+                                  }
+                              }
+                              else{
+                                  viewerContainerSeries[2].marginLeft = 0;
+                                  videoContainer.style.left = viewerContainerSeries[2].left;
+                              }
+                              console.log(topMult);
+                              videoContainer.style.top = (topMult*viewerContainerSeries[2].height)+"px";
+                              //videoContainer.style.top = viewerContainerSeries[2].top;
+                              videoContainer.style.marginTop = viewerContainerSeries[2].marginTop;
+                              videoContainer.style.marginLeft = viewerContainerSeries[2].marginLeft+"px";
+
+                              videoContainer.setAttribute("width", viewerContainerSeries[2].width);
+                              videoContainer.style.width = viewerContainerSeries[2].width+"px";
+                              videoContainer.setAttribute("height",viewerContainerSeries[2].height);
+                              videoContainer.style.height = viewerContainerSeries[2].height+"px";
+                          }
+                          else{
+                              let count = viewerTracker.length-1;
+                              if(i>0){
+                                  videoContainer.style.top = (i*viewerContainerSeries[count].height)+"px";
+                              }
+                              else{
+                                  videoContainer.style.top = viewerContainerSeries[count].top;
+                              }
+                              videoContainer.style.marginTop = viewerContainerSeries[count].marginTop;
+                              videoContainer.style.marginLeft = viewerContainerSeries[count].marginLeft+"px";
+                              videoContainer.setAttribute("width", viewerContainerSeries[count].width);
+                              videoContainer.style.width = viewerContainerSeries[count].width+"px";
+                              videoContainer.setAttribute("height", viewerContainerSeries[count].height);
+                              videoContainer.style.height = viewerContainerSeries[count].height+"px";
+                          }
+
+                          document.getElementById("main-app-container").appendChild(videoContainer);
+                      })();
+                  }
+
               }
 
               function showLinkStatusDisplay(){
@@ -137,7 +209,7 @@
 <body>
     <!-- Stream video via webcam -->
     <div id="main-app-container">
-        <video id="webcam-container" autoplay width="640" height="480" style="border: black 2px solid;"></video>
+        <video id="webcam-0-container" class="viewer-container" autoplay width="640" height="480" style="border: black 2px solid;"></video>
         <div id="errorMsg"></div>
         <div class="menu-container">
             <div id="connect-to-rfid-menu-button" class="menu-button">conn</div>

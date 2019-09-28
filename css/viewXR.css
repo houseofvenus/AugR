@@ -6,16 +6,23 @@
     font-family: "Archivo", sans-serif;
 }
 
-body, html, #main-app-container{
+body, html{
     width: 100%;
     height: 100%;
+    position: relative;
+}
+
+#main-app-container{
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 #main-app-container{
     background-color: rgba(0, 0, 0, 0.95);
 }
 
-#webcam-container, #second-webcam-container{
+.viewer-container{
   box-shadow: 5px 5px 5px white;
     width: 640px;
     height: 480px;
@@ -24,7 +31,7 @@ body, html, #main-app-container{
     transition: top 0.5s, left 0.5s, right 0.5s, bottom 0.5s;
 }
 
-#webcam-container{
+#webcam-0-container{
     top: 50%;
     margin: -240px 0 0 -320px;
 }
