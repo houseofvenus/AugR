@@ -91,15 +91,18 @@
                                       *   i.e. connect to various cARds locally by tapping or
                                       *   remotely via pARk broadcast
                                       */
-
+//new screen creation step
                   let nextView = document.createElement("video");
                   nextView.setAttribute("id", `webcam-${viewerTracker.length}-container`);
                   nextView.classList.add(`viewer-container`);
 
+//add the new screen to the list of sceens
                   viewerTracker.push(nextView);
                   console.log(viewerTracker);
                   console.log("-------------------------------------------------");
                   let topMult = 0;
+
+                  //for each item in the list update the margins and positioning
                   for(var i=0; i<viewerTracker.length; i++){
                       (function(){
                           let videoContainer = viewerTracker[i];
