@@ -36,5 +36,5 @@ document.addEventListener("DOMContentLoaded", function(){
               console.error(error);
           }
       }
-    }, 5000);
+    }, 1000);
 });

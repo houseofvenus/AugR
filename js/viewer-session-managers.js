@@ -31,9 +31,7 @@ var  viewerContainerSeries = [
     }
 ];
 
-var viewerTracker = [
-    document.getElementById("webcam-0-container"),
-];
+var viewerTracker = [];
 
 var sessionManager = {
     statusShown: false,

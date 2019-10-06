@@ -1,18 +1,25 @@
 document.addEventListener("DOMContentLoaded", function(){
+
     setTimeout(function(){
-      document.getElementById("connect-to-rfid-menu-button").addEventListener("click", function(){
-          connectToRFID();
-      });
+        var viewerTracker = [
+            document.getElementById("webcam-0-container"),
+        ];
+    }, 250);
 
-      document.getElementById("link-to-new-rfid-menu-button").addEventListener("click", function(){
-          activateDeviceNFCReader();
-          splitScreen();
-          opencARd(1);
-      });
+    setTimeout(function(){
+        document.getElementById("connect-to-rfid-menu-button").addEventListener("click", function(){
+            connectToRFID();
+        });
 
-      document.getElementById("split-screen-menu-button").addEventListener("click", function(){ //
-          splitScreen();
-      });
-    }, 3000);
+        document.getElementById("link-to-new-rfid-menu-button").addEventListener("click", function(){
+            activateDeviceNFCReader();
+            splitScreen();
+            opencARd(1);
+        });
+
+        document.getElementById("split-screen-menu-button").addEventListener("click", function(){ //
+            splitScreen();
+        });
+    }, 500);
 
 });

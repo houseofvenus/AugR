@@ -9,4 +9,5 @@ document.body.innerHTML = `<div id="main-app-container">
         <div id="split-screen-menu-button" class="menu-button">splt</div>
     </div>
 </div>`;
+
 console.log(document.body);

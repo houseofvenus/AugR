@@ -1,4 +1,5 @@
 function splitScreen(){
+  
    /*
                         *   splits the screen to allow for multiple "desktops",
                         *   i.e. connect to various cARds locally by tapping or
