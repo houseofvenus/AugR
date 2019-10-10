@@ -72,6 +72,11 @@ app.get('/js/:script_id', function(req, res){
     res.sendFile(script_id, {root: dir[2]} );
 });
 
+app.get('/media/img/:img_id', function(req, res){
+    let img_id = req.params.img_id;
+    res.sendFile(img_id, {root: dir[6]} );
+});
+
 var io = require('socket.io').listen(app.listen(config.PORT, function(){
     console.log('connecting \n . \n .. \n ... \n .... \n ..... \n ------------------------------------------');
     console.log('    VIEWXR v 0.0.1 ');

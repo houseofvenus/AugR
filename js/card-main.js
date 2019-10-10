@@ -16,10 +16,6 @@ document.addEventListener("DOMContentLoaded", function(){
             splitScreen();
             opencARd(1);
         });
-
-        document.getElementById("split-screen-menu-button").addEventListener("click", function(){ //
-            splitScreen();
-        });
     }, 500);
 
 });
