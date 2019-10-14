@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(){
+    let sessionManager = {
+        connection: io.connect(location.host),
+        network: "pARk"
+    };
 
     setTimeout(function(){
         var viewerTracker = [
@@ -8,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     setTimeout(function(){
         document.getElementById("connect-to-rfid-menu-button").addEventListener("click", function(){
-            connectToRFID();
+            connectToRFID(sessionManager.connection, sessionManager.network);
         });
 
         document.getElementById("link-to-new-rfid-menu-button").addEventListener("click", function(){

@@ -79,7 +79,7 @@ app.get('/media/img/:img_id', function(req, res){
 
 var io = require('socket.io').listen(app.listen(config.PORT, function(){
     console.log('connecting \n . \n .. \n ... \n .... \n ..... \n ------------------------------------------');
-    console.log('    VIEWXR v 0.0.1 ');
+    console.log('    AUGR 0.0.2');
     console.log('------------------------------------------');
     console.log(`[0] listening on port ${config.PORT}`);
     console.log('------------------------------------------');
@@ -94,6 +94,12 @@ io.sockets.on('connection', function(socket){
 
 
     // client sockets
+    socket.on("checkForNodeOnNetwork", function(data){
+        let meta = data;
+        if(meta.status){
+            console.log(`searching for node on ${meta.name} network...`);
+        }
+    });
 
     socket.on('disconnect', function(){
         console.log(`socket ${socket.id} disconnected.`);

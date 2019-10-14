@@ -1,5 +1,5 @@
 function splitScreen(){
-  
+
    /*
                         *   splits the screen to allow for multiple "desktops",
                         *   i.e. connect to various cARds locally by tapping or
@@ -134,13 +134,16 @@ function showLinkStatusDisplay(code){
 
 }
 
-function activateDeviceNFCReader(){
-    console.log("TODO: checking if device nfc reader is already active...");
-    console.log("TODO: activating device nfc reader...");
+function activateDeviceNFCReader(connection, target){
+    let conn = connection;
+    let title = target;
+    conn.emit("checkForNodeOnNetwork", {status: true, name: title});
 }
 
-function connectToRFID(){
-    activateDeviceNFCReader();
+function connectToRFID(socket, object){
+    let connection = socket;
+    let target = object;
+    activateDeviceNFCReader(connection, target);
     opencARd(0);
 }
 
